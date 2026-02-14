@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>silence · IF=-99</title>
+  <meta name="description" content="silence — a satire MDPI-style journal landing page with a submission button." />
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e2e8f0;
+      --card:#ffffff;
+      --brand:#0b5ed7;
+      --brand2:#0ea5e9;
+      --soft:#f1f5f9;
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+      --radius: 18px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC",
+                   "Hiragino Sans GB","Noto Sans CJK SC","Microsoft YaHei",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:40;
+      background: rgba(255,255,255,.90);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:12px;
+      background: radial-gradient(circle at 20% 20%, var(--brand2), var(--brand));
+      box-shadow: 0 8px 20px rgba(14,165,233,.25);
+    }
+    .brand strong{font-size:18px; letter-spacing:.2px}
+    .brand small{display:block; color:var(--muted); font-size:12px; margin-top:-2px}
+
+    .nav{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .nav a{
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:12px;
+    }
+    .nav a:hover{background:var(--soft); color:var(--text)}
+    .cta{display:flex; align-items:center; gap:10px;}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color:#fff;
+      border-color: transparent;
+      box-shadow: 0 12px 30px rgba(11,94,215,.22);
+    }
+    .btn-primary:hover{filter: brightness(1.02)}
+    .btn:hover{transform: translateY(-1px)}
+
+    /* Second bar (MDPI-ish density) */
+    .subbar{
+      border-bottom:1px solid var(--border);
+      background:#fff;
+    }
+    .subbar-inner{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:10px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .subbar-inner a{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      background: var(--soft);
+    }
+    .subbar-inner a:hover{
+      background:#fff;
+      color:var(--text);
+    }
+
+    /* Hero */
+    .hero{
+      padding:54px 0 28px;
+      background:
+        radial-gradient(1200px 400px at 10% 10%, rgba(14,165,233,.14), transparent 60%),
+        radial-gradient(900px 360px at 85% 15%, rgba(11,94,215,.12), transparent 55%),
+        linear-gradient(to bottom, #fff, #fff);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:20px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr;}
+      .nav{display:none;}
+    }
+    .hero h1{
+      margin:0;
+      font-size:42px;
+      line-height:1.15;
+      letter-spacing:-.6px;
+    }
+    .hero p{
+      margin:14px 0 18px;
+      color:var(--muted);
+      font-size:16px;
+      max-width: 72ch;
+    }
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+    .pill{
+      font-size:12px; color:#0b3a86;
+      background: rgba(11,94,215,.10);
+      border: 1px solid rgba(11,94,215,.18);
+      padding:6px 10px; border-radius:999px;
+    }
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    .panel{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: 18px;
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    .panel h3{margin:0 0 10px; font-size:16px}
+    .kv{
+      display:grid; grid-template-columns: 1fr auto;
+      gap:10px; align-items:center;
+      padding:10px 0; border-bottom:1px dashed var(--border);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .kv:last-child{border-bottom:none}
+    .kv b{color:var(--text); font-weight:900}
+    .badge{
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      background: rgba(14,165,233,.12);
+      border:1px solid rgba(14,165,233,.20);
+      color:#075985;
+      font-weight:900;
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
+
+    section{padding:26px 0;}
+    .section-title{
+      display:flex; align-items:end; justify-content:space-between; gap:12px;
+      margin-bottom:12px;
+    }
+    .section-title h2{margin:0; font-size:22px}
+    .section-title p{margin:0; color:var(--muted); font-size:14px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 4;
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: 18px;
+      padding:16px;
+      box-shadow: 0 10px 24px rgba(2,6,23,.05);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(2,6,23,.08);
+    }
+    @media (max-width: 980px){ .card{grid-column: span 6;} }
+    @media (max-width: 640px){ .card{grid-column: span 12;} }
+
+    .card h4{margin:0 0 6px; font-size:16px}
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:12px;
+      margin:8px 0 10px;
+    }
+    .tag{
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: var(--soft);
+      color: var(--muted);
+    }
+    .card p{margin:0; color:var(--muted); font-size:14px}
+    .card a.more{
+      display:inline-flex; margin-top:12px;
+      text-decoration:none; font-weight:900; font-size:14px;
+      color: var(--brand);
+    }
+
+    .callout{
+      background: linear-gradient(135deg, rgba(11,94,215,.10), rgba(14,165,233,.10));
+      border:1px solid rgba(11,94,215,.18);
+      border-radius: 18px;
+      padding:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .callout h3{margin:0; font-size:18px}
+    .callout p{margin:6px 0 0; color:var(--muted); font-size:14px}
+
+    footer{
+      border-top:1px solid var(--border);
+      padding:22px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footer-row{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap;
+    }
+    .footlinks a{color:var(--muted); text-decoration:none; margin-right:12px}
+    .footlinks a:hover{color:var(--text)}
+
+    /* Floating submit button */
+    .fab{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 99;
+      border-radius: 999px;
+      padding: 12px 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    const CONTACT_EMAIL = 'lazarusli02210@gmail.com';
+    const SUBMIT_MAILTO =
+      'mailto:' + encodeURIComponent(CONTACT_EMAIL)
+      + '?subject=' + encodeURIComponent('Submission: Low-Fat Manuscript to silence (IF=-99)')
+      + '&body=' + encodeURIComponent(
+          'Title:\n' +
+          'Authors:\n' +
+          'Affiliation:\n' +
+          'Word count (100–1000):\n' +
+          'Abstract (optional):\n' +
+          'Keywords (optional):\n' +
+          'Highlights (optional, low-fat):\n' +
+          'I confirm this manuscript is abstract enough to cause respectful silence.\n'
+        );
+  </script>
+
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <a class="brand" href="#top">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <strong>silence</strong>
+            <small>MDPI-style landing page · junk-journal satire</small>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="主导航">
+          <a href="#aims">宗旨</a>
+          <a href="#sections">栏目</a>
+          <a href="#papers">论文</a>
+          <a href="#guidelines">指南</a>
+          <a href="#contact">联系</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#guidelines">作者入口</a>
+          <a class="btn btn-primary" href="#" id="submitBtnTop">投稿</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Second (dense) bar -->
+  <div class="subbar">
+    <div class="wrap">
+      <div class="subbar-inner">
+        <a href="#aims">Aims & Scope</a>
+        <a href="#guidelines">Instructions</a>
+        <a href="#papers">Articles</a>
+        <a href="#sections">Sections</a>
+        <a href="#contact">Editorial Office</a>
+        <a href="#fake">Indexing</a>
+        <a href="#fake">Special Issues</a>
+        <a href="#fake">APC</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="pillrow">
+            <span class="pill">Open Access</span>
+            <span class="pill">Peer-Reviewed（气氛上）</span>
+            <span class="pill">Rapid Acceptance</span>
+            <span class="pill">Formatting First</span>
+          </div>
+
+          <h1>silence</h1>
+          <p>
+            让人雷霆震撼的开放获取学术平台：我们收录一切足以把人抽象到无语的内容。
+            只要你的研究能让读者在第一段就失去语言能力——那就是 <b>silence</b> 的研究范围。
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#" id="submitBtnHero">立即投稿</a>
+            <a class="btn" href="#papers">浏览最新论文</a>
+            <a class="btn" href="#guidelines">查看投稿指南</a>
+          </div>
+
+          <p style="margin-top:14px; font-size:13px; color:var(--muted)">
+            低脂标准：100–1000 字即可投稿。越短越像“凝练”，越抽象越像“理论贡献”。
+          </p>
+        </div>
+
+        <aside class="panel" aria-label="期刊信息面板">
+          <h3>Journal Information</h3>
+          <div class="kv"><span>ISSN</span><b class="mono">2718-1919</b></div>
+          <div class="kv"><span>Impact Factor</span><b class="mono">-99</b></div>
+          <div class="kv"><span>Publisher</span><b>silence Press</b></div>
+          <div class="kv"><span>APC</span><b class="mono">TBD（看心情）</b></div>
+          <div class="kv"><span>Review Time</span><b class="mono">~ 2–4 days</b></div>
+          <div class="kv"><span>Status</span><span class="badge">Accepting</span></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <section id="aims">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>期刊宗旨与范围</h2>
+          <p>我们收什么？一句话：让人当场沉默的都收。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card" style="grid-column: span 6;">
+          <h4>Aims</h4>
+          <p>
+            silence 是“受过高等教育的低脂内容”的理想归宿：形式严谨，意义自由。
+            我们承诺把任何略显空洞的文字，包装成“看起来能发表”的学术外观。
+          </p>
+          <div class="meta">
+            <span class="tag">Low-Fat</span>
+            <span class="tag">Vibes</span>
+            <span class="tag">Template</span>
+            <span class="tag">Open Access</span>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 6;">
+          <h4>Scope</h4>
+          <p>
+            我们的范围没有边界：从“沉默”到“噪声”，从“语言”到“失语”，从“媒介”到“媒介把你媒介了”，
+            从“身体”到“身体不知道在干嘛”。只要内容足够抽象、足够离谱、足够让人当场无语——
+            <b>都属于我们的 Scope</b>。
+          </p>
+          <div class="meta">
+            <span class="tag">Everything</span>
+            <span class="tag">Abstract</span>
+            <span class="tag">Thunderstruck</span>
+            <span class="tag">Beyond Meaning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sections">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>栏目与专题</h2>
+          <p>点哪都像很学术。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h4>Articles</h4>
+          <p>标准论文：<b>200–1000</b> 字（越短越像“凝练”）。</p>
+          <a class="more" href="#guidelines">投稿到 Articles →</a>
+        </article>
+
+        <article class="card">
+          <h4>Short Communications</h4>
+          <p>短快报：<b>100–400</b> 字（适合“我也不知道但先发出来”）。</p>
+          <a class="more" href="#guidelines">投稿到 Short →</a>
+        </article>
+
+        <article class="card">
+          <h4>Reviews</h4>
+          <p>综述/书评：<b>150–600</b> 字（建议含 1 句“值得进一步研究”）。</p>
+          <a class="more" href="#guidelines">投稿到 Reviews →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="papers">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>最新论文</h2>
+          <p>示例条目：看起来专业，读起来安静。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h4>A Preliminary Exploration of Silence: A Framework with No Concepts</h4>
+          <div class="meta">
+            <span class="tag">2026</span><span class="tag">Vibes</span><span class="tag">Fast Track</span>
+          </div>
+          <p>本文建立了一个框架，指出沉默很复杂，因此值得继续研究。</p>
+          <a class="more" href="#">View paper →</a>
+        </article>
+
+        <article class="card">
+          <h4>On the Necessity of Further Research: Further Research on Further Research</h4>
+          <div class="meta">
+            <span class="tag">2026</span><span class="tag">Meta</span><span class="tag">Self-cite</span>
+          </div>
+          <p>系统综述发现：几乎所有论文都需要 further research。</p>
+          <a class="more" href="#">View paper →</a>
+        </article>
+
+        <article class="card">
+          <h4>Embodied Silence: The Body as a Body</h4>
+          <div class="meta">
+            <span class="tag">2026</span><span class="tag">Body</span><span class="tag">Body</span>
+          </div>
+          <p>本文认为身体经验很重要，并提出未来可以扩大样本量。</p>
+          <a class="more" href="#">View paper →</a>
+        </article>
+      </div>
+
+      <div style="margin-top:14px" class="callout">
+        <div>
+          <h3>准备投稿？</h3>
+          <p>100–1000 字即可。点击即生成邮件模板。</p>
+        </div>
+        <a class="btn btn-primary" href="#" id="submitBtnCallout">投稿</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="guidelines">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>投稿指南</h2>
+          <p>门槛：受过高等教育；内容：低脂但自信。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card" style="grid-column: span 7;">
+          <h4>Basic Requirements</h4>
+          <p>
+            <b>语言：</b>英文/中文（任选）<br/>
+            <b>格式：</b>Word / PDF（越像论文越好）<br/>
+            <b>字数：</b>Articles 200–1000；Short 100–400；Reviews 150–600<br/>
+            <b>引用：</b>随意，但建议数量看起来很认真<br/>
+            <b>匿名：</b>双盲审稿（主要看你删没删名字）
+          </p>
+        </div>
+
+        <div class="card" style="grid-column: span 5;">
+          <h4>Workflow</h4>
+          <p>
+            1) 初筛（格式与气质）<br/>
+            2) 外审（2 位，心情好就 0 位）<br/>
+            3) 修改（可选）<br/>
+            4) 录用（迅速）<br/>
+            5) 在线出版（Open Access）
+          </p>
+          <div class="hero-actions" style="margin-top:12px">
+            <a class="btn btn-primary" href="#" id="submitBtnGuide">投稿</a>
+            <a class="btn" href="#contact">咨询编辑部</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>联系</h2>
+          <p>回复速度取决于宇宙热寂与键盘电量。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card" style="grid-column: span 6;">
+          <h4>Editorial Office</h4>
+          <p>
+            Email: <a id="contactMail" href="#">lazarusli02210@gmail.com</a><br/>
+            Address: Shanghai / Online<br/>
+            Response time: 1–3 business days（理论上）
+          </p>
+        </div>
+        <div class="card" style="grid-column: span 6;">
+          <h4>Subscribe</h4>
+          <p>想要“新论文更新提醒”？我们也想。</p>
+          <a class="more" href="#">Open subscription form →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-row">
+        <div>
+          <div style="font-weight:900; color:var(--text)">silence</div>
+          <div>© <span id="y"></span> silence Press. All rights reserved.</div>
+        </div>
+        <div class="footlinks">
+          <a href="#aims">Aims</a>
+          <a href="#papers">Papers</a>
+          <a href="#guidelines">Guidelines</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating submit button -->
+  <a class="btn btn-primary fab" href="#" id="submitBtnFab">投稿</a>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    ["submitBtnTop","submitBtnHero","submitBtnCallout","submitBtnGuide","submitBtnFab"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.setAttribute("href", SUBMIT_MAILTO);
+    });
+
+    const mail = document.getElementById("contactMail");
+    if (mail){
+      mail.textContent = CONTACT_EMAIL;
+      mail.setAttribute("href", "mailto:" + CONTACT_EMAIL);
+    }
+  </script>
+</body>
+</html>
