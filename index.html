@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>silence · IF=-99</title>
-  <meta name="description" content="silence — a satire MDPI-style journal landing page with a submission button." />
+  <meta name="description" content="silence — a satire journal landing page with a submission button." />
 
   <style>
     :root{
@@ -82,6 +82,7 @@
       font-weight:700;
       font-size:14px;
       transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      white-space:nowrap;
     }
     .btn-primary{
       background: linear-gradient(135deg, var(--brand), var(--brand2));
@@ -92,7 +93,7 @@
     .btn-primary:hover{filter: brightness(1.02)}
     .btn:hover{transform: translateY(-1px)}
 
-    /* Second bar (MDPI-ish density) */
+    /* Second bar (compact links) */
     .subbar{
       border-bottom:1px solid var(--border);
       background:#fff;
@@ -119,7 +120,7 @@
 
     /* Hero */
     .hero{
-      padding:54px 0 28px;
+      padding:34px 0 18px;
       background:
         radial-gradient(1200px 400px at 10% 10%, rgba(14,165,233,.14), transparent 60%),
         radial-gradient(900px 360px at 85% 15%, rgba(11,94,215,.12), transparent 55%),
@@ -128,7 +129,7 @@
     .hero-grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap:20px;
+      gap:18px;
       align-items:stretch;
     }
     @media (max-width: 920px){
@@ -136,25 +137,27 @@
       .nav{display:none;}
     }
     .hero h1{
-      margin:0;
+      margin:8px 0 8px;
       font-size:42px;
       line-height:1.15;
       letter-spacing:-.6px;
     }
     .hero p{
-      margin:14px 0 18px;
+      margin:10px 0 14px;
       color:var(--muted);
       font-size:16px;
-      max-width: 72ch;
+      max-width: 78ch;
     }
-    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px}
+
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:2px}
     .pill{
       font-size:12px; color:#0b3a86;
       background: rgba(11,94,215,.10);
       border: 1px solid rgba(11,94,215,.18);
       padding:6px 10px; border-radius:999px;
     }
-    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
 
     .panel{
       background: var(--card);
@@ -276,15 +279,15 @@
     const CONTACT_EMAIL = 'lazarusli02210@gmail.com';
     const SUBMIT_MAILTO =
       'mailto:' + encodeURIComponent(CONTACT_EMAIL)
-      + '?subject=' + encodeURIComponent('Submission: Low-Fat Manuscript to silence (IF=-99)')
+      + '?subject=' + encodeURIComponent('Submission: Manuscript to silence (IF=-99)')
       + '&body=' + encodeURIComponent(
           'Title:\n' +
           'Authors:\n' +
           'Affiliation:\n' +
-          'Word count (100–1000):\n' +
+          'Word count:\n' +
           'Abstract (optional):\n' +
           'Keywords (optional):\n' +
-          'Highlights (optional, low-fat):\n' +
+          'Highlights (optional):\n' +
           'I confirm this manuscript is abstract enough to cause respectful silence.\n'
         );
   </script>
@@ -296,7 +299,7 @@
           <div class="logo" aria-hidden="true"></div>
           <div>
             <strong>silence</strong>
-            <small>MDPI-style landing page · junk-journal satire</small>
+            <small>journal landing page · satire</small>
           </div>
         </a>
 
@@ -316,18 +319,18 @@
     </div>
   </header>
 
-  <!-- Second (dense) bar -->
+  <!-- Compact bar -->
   <div class="subbar">
     <div class="wrap">
       <div class="subbar-inner">
-        <a href="#aims">Aims & Scope</a>
-        <a href="#guidelines">Instructions</a>
+        <a href="#aims">About</a>
+        <a href="#guidelines">Author Guide</a>
         <a href="#papers">Articles</a>
         <a href="#sections">Sections</a>
-        <a href="#contact">Editorial Office</a>
-        <a href="#fake">Indexing</a>
-        <a href="#fake">Special Issues</a>
-        <a href="#fake">APC</a>
+        <a href="#contact">Contact</a>
+        <a href="#fake">Policies</a>
+        <a href="#fake">Topics</a>
+        <a href="#fake">Fees</a>
       </div>
     </div>
   </div>
@@ -336,38 +339,49 @@
     <div class="wrap">
       <div class="hero-grid">
         <div>
-          <div class="pillrow">
+          <div class="pillrow" aria-label="journal badges">
             <span class="pill">Open Access</span>
-            <span class="pill">Peer-Reviewed（气氛上）</span>
-            <span class="pill">Rapid Acceptance</span>
-            <span class="pill">Formatting First</span>
+            <span class="pill">Editorial Review</span>
+            <span class="pill">Fast Decision</span>
+            <span class="pill">Template-Friendly</span>
+            <span class="pill">Concepts Optional</span>
           </div>
 
           <h1>silence</h1>
+
           <p>
-            让人雷霆震撼的开放获取学术平台：我们收录一切足以把人抽象到无语的内容。
-            只要你的研究能让读者在第一段就失去语言能力——那就是 <b>silence</b> 的研究范围。
+            一个快速、开放、并且非常擅长让读者“当场失语”的刊物主页（satire）。
+            只要你的研究能在第一段制造礼貌性的沉默，它就属于我们的范围。
+            <br/>
+            <span class="mono" style="font-size:13px; opacity:.85;">
+              (We care about format. Meaning is negotiable.)
+            </span>
           </p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#" id="submitBtnHero">立即投稿</a>
-            <a class="btn" href="#papers">浏览最新论文</a>
-            <a class="btn" href="#guidelines">查看投稿指南</a>
+            <a class="btn" href="#papers">浏览文章</a>
+            <a class="btn" href="#guidelines">作者指南</a>
           </div>
 
-          <p style="margin-top:14px; font-size:13px; color:var(--muted)">
-            低脂标准：100–1000 字即可投稿。越短越像“凝练”，越抽象越像“理论贡献”。
+          <p style="margin-top:12px; font-size:13px; color:var(--muted)">
+            建议字数：<b>100–1000</b>。越短越像“凝练”，越抽象越像“理论贡献”。
           </p>
         </div>
 
         <aside class="panel" aria-label="期刊信息面板">
           <h3>Journal Information</h3>
           <div class="kv"><span>ISSN</span><b class="mono">2718-1919</b></div>
-          <div class="kv"><span>Impact Factor</span><b class="mono">-99</b></div>
+          <div class="kv"><span>Impact Metric</span><b class="mono">-99</b></div>
           <div class="kv"><span>Publisher</span><b>silence Press</b></div>
-          <div class="kv"><span>APC</span><b class="mono">TBD（看心情）</b></div>
-          <div class="kv"><span>Review Time</span><b class="mono">~ 2–4 days</b></div>
+          <div class="kv"><span>Fee</span><b class="mono">TBD</b></div>
+          <div class="kv"><span>Decision Time</span><b class="mono">~ 2–4 days</b></div>
           <div class="kv"><span>Status</span><span class="badge">Accepting</span></div>
+
+          <div style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); color:var(--muted); font-size:13px;">
+            <b style="color:var(--text);">Note:</b>
+            Please keep margins correct. Everything else is flexible.
+          </div>
         </aside>
       </div>
     </div>
@@ -393,7 +407,7 @@
             <span class="tag">Low-Fat</span>
             <span class="tag">Vibes</span>
             <span class="tag">Template</span>
-            <span class="tag">Open Access</span>
+            <span class="tag">Open</span>
           </div>
         </div>
 
@@ -407,8 +421,8 @@
           <div class="meta">
             <span class="tag">Everything</span>
             <span class="tag">Abstract</span>
-            <span class="tag">Thunderstruck</span>
             <span class="tag">Beyond Meaning</span>
+            <span class="tag">Unclear</span>
           </div>
         </div>
       </div>
@@ -432,7 +446,7 @@
         </article>
 
         <article class="card">
-          <h4>Short Communications</h4>
+          <h4>Short Notes</h4>
           <p>短快报：<b>100–400</b> 字（适合“我也不知道但先发出来”）。</p>
           <a class="more" href="#guidelines">投稿到 Short →</a>
         </article>
@@ -450,7 +464,7 @@
     <div class="wrap">
       <div class="section-title">
         <div>
-          <h2>最新论文</h2>
+          <h2>最新文章</h2>
           <p>示例条目：看起来专业，读起来安静。</p>
         </div>
       </div>
@@ -462,7 +476,7 @@
             <span class="tag">2026</span><span class="tag">Vibes</span><span class="tag">Fast Track</span>
           </div>
           <p>本文建立了一个框架，指出沉默很复杂，因此值得继续研究。</p>
-          <a class="more" href="#">View paper →</a>
+          <a class="more" href="#">View →</a>
         </article>
 
         <article class="card">
@@ -471,7 +485,7 @@
             <span class="tag">2026</span><span class="tag">Meta</span><span class="tag">Self-cite</span>
           </div>
           <p>系统综述发现：几乎所有论文都需要 further research。</p>
-          <a class="more" href="#">View paper →</a>
+          <a class="more" href="#">View →</a>
         </article>
 
         <article class="card">
@@ -480,14 +494,14 @@
             <span class="tag">2026</span><span class="tag">Body</span><span class="tag">Body</span>
           </div>
           <p>本文认为身体经验很重要，并提出未来可以扩大样本量。</p>
-          <a class="more" href="#">View paper →</a>
+          <a class="more" href="#">View →</a>
         </article>
       </div>
 
       <div style="margin-top:14px" class="callout">
         <div>
           <h3>准备投稿？</h3>
-          <p>100–1000 字即可。点击即生成邮件模板。</p>
+          <p>点击即生成邮件模板。</p>
         </div>
         <a class="btn btn-primary" href="#" id="submitBtnCallout">投稿</a>
       </div>
@@ -498,7 +512,7 @@
     <div class="wrap">
       <div class="section-title">
         <div>
-          <h2>投稿指南</h2>
+          <h2>作者指南</h2>
           <p>门槛：受过高等教育；内容：低脂但自信。</p>
         </div>
       </div>
@@ -511,7 +525,7 @@
             <b>格式：</b>Word / PDF（越像论文越好）<br/>
             <b>字数：</b>Articles 200–1000；Short 100–400；Reviews 150–600<br/>
             <b>引用：</b>随意，但建议数量看起来很认真<br/>
-            <b>匿名：</b>双盲审稿（主要看你删没删名字）
+            <b>匿名：</b>双盲（主要看你删没删名字）
           </p>
         </div>
 
@@ -519,14 +533,14 @@
           <h4>Workflow</h4>
           <p>
             1) 初筛（格式与气质）<br/>
-            2) 外审（2 位，心情好就 0 位）<br/>
+            2) 评审（若干位，视宇宙热寂而定）<br/>
             3) 修改（可选）<br/>
             4) 录用（迅速）<br/>
-            5) 在线出版（Open Access）
+            5) 发布（公开）
           </p>
           <div class="hero-actions" style="margin-top:12px">
             <a class="btn btn-primary" href="#" id="submitBtnGuide">投稿</a>
-            <a class="btn" href="#contact">咨询编辑部</a>
+            <a class="btn" href="#contact">咨询</a>
           </div>
         </div>
       </div>
@@ -538,23 +552,23 @@
       <div class="section-title">
         <div>
           <h2>联系</h2>
-          <p>回复速度取决于宇宙热寂与键盘电量。</p>
+          <p>回复速度取决于键盘电量。</p>
         </div>
       </div>
 
       <div class="grid">
         <div class="card" style="grid-column: span 6;">
-          <h4>Editorial Office</h4>
+          <h4>Office</h4>
           <p>
             Email: <a id="contactMail" href="#">lazarusli02210@gmail.com</a><br/>
-            Address: Shanghai / Online<br/>
+            Address: Online<br/>
             Response time: 1–3 business days（理论上）
           </p>
         </div>
         <div class="card" style="grid-column: span 6;">
           <h4>Subscribe</h4>
-          <p>想要“新论文更新提醒”？我们也想。</p>
-          <a class="more" href="#">Open subscription form →</a>
+          <p>想要“新文章提醒”？我们也想。</p>
+          <a class="more" href="#">Open form →</a>
         </div>
       </div>
     </div>
@@ -568,9 +582,9 @@
           <div>© <span id="y"></span> silence Press. All rights reserved.</div>
         </div>
         <div class="footlinks">
-          <a href="#aims">Aims</a>
-          <a href="#papers">Papers</a>
-          <a href="#guidelines">Guidelines</a>
+          <a href="#aims">About</a>
+          <a href="#papers">Articles</a>
+          <a href="#guidelines">Guide</a>
           <a href="#top">Back to top</a>
         </div>
       </div>
