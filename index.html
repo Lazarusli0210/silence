@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>lazarusli · Social Journal (ISSN 2718-1919)</title>
-  <meta name="description" content="lazarusli — a satire journal-style landing page for a social media scholar. ISSN 2718-1919." />
+  <meta name="description" content="A journal-style landing page for a social media scholar. ISSN 2718-1919." />
 
   <style>
     :root{
@@ -48,7 +48,7 @@
     .brand{
       display:flex; align-items:center; gap:12px;
       text-decoration:none;
-      min-width: 220px;
+      min-width: 240px;
     }
     .logo{
       width:38px; height:38px; border-radius:12px;
@@ -57,15 +57,13 @@
       position: relative;
       overflow: hidden;
     }
-    /* tiny “S” slash vibe without text */
     .logo:after{
       content:"";
       position:absolute; inset:-10px;
       background: linear-gradient(135deg, rgba(255,255,255,.0), rgba(255,255,255,.65), rgba(255,255,255,0));
       transform: rotate(25deg);
-      opacity:.5;
+      opacity:.55;
     }
-
     .brand strong{font-size:18px; letter-spacing:.2px}
     .brand small{display:block; color:var(--muted); font-size:12px; margin-top:-2px}
 
@@ -77,4 +75,527 @@
     .nav a{
       text-decoration:none;
       padding:8px 10px;
-      border-radius:
+      border-radius:12px;
+    }
+    .nav a:hover{background:var(--soft); color:var(--text)}
+    .cta{display:flex; align-items:center; gap:10px;}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:800;
+      font-size:14px;
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn-primary{
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color:#fff;
+      border-color: transparent;
+      box-shadow: 0 12px 30px rgba(11,94,215,.22);
+    }
+    .btn-primary:hover{filter: brightness(1.02)}
+
+    /* Second bar */
+    .subbar{
+      border-bottom:1px solid var(--border);
+      background:#fff;
+    }
+    .subbar-inner{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:10px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .subbar-inner a{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      text-decoration:none;
+      background: var(--soft);
+    }
+    .subbar-inner a:hover{background:#fff; color:var(--text)}
+
+    /* Hero */
+    .hero{
+      padding:34px 0 18px;
+      background:
+        radial-gradient(1200px 400px at 10% 10%, rgba(14,165,233,.14), transparent 60%),
+        radial-gradient(900px 360px at 85% 15%, rgba(11,94,215,.12), transparent 55%),
+        linear-gradient(to bottom, #fff, #fff);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr;}
+      .nav{display:none;}
+    }
+    .hero h1{
+      margin:8px 0 8px;
+      font-size:40px;
+      line-height:1.15;
+      letter-spacing:-.6px;
+    }
+    .hero p{
+      margin:10px 0 14px;
+      color:var(--muted);
+      font-size:16px;
+      max-width: 78ch;
+    }
+
+    .pillrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:2px}
+    .pill{
+      font-size:12px; color:#0b3a86;
+      background: rgba(11,94,215,.10);
+      border: 1px solid rgba(11,94,215,.18);
+      padding:6px 10px; border-radius:999px;
+    }
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+
+    .panel{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+    }
+    .panel h3{margin:0 0 10px; font-size:16px}
+    .kv{
+      display:grid; grid-template-columns: 1fr auto;
+      gap:10px; align-items:center;
+      padding:10px 0; border-bottom:1px dashed var(--border);
+      color:var(--muted);
+      font-size:14px;
+    }
+    .kv:last-child{border-bottom:none}
+    .kv b{color:var(--text); font-weight:900}
+    .badge{
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      background: rgba(14,165,233,.12);
+      border:1px solid rgba(14,165,233,.20);
+      color:#075985;
+      font-weight:900;
+    }
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;}
+
+    section{padding:26px 0;}
+    .section-title{
+      display:flex; align-items:end; justify-content:space-between; gap:12px;
+      margin-bottom:12px;
+    }
+    .section-title h2{margin:0; font-size:22px}
+    .section-title p{margin:0; color:var(--muted); font-size:14px}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 4;
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 24px rgba(2,6,23,.05);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(2,6,23,.08);
+    }
+    @media (max-width: 980px){ .card{grid-column: span 6;} }
+    @media (max-width: 640px){ .card{grid-column: span 12;} }
+
+    .card h4{margin:0 0 6px; font-size:16px}
+    .meta{
+      display:flex; gap:8px; flex-wrap:wrap;
+      color:var(--muted); font-size:12px;
+      margin:8px 0 10px;
+    }
+    .tag{
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: var(--soft);
+      color: var(--muted);
+    }
+    .card p{margin:0; color:var(--muted); font-size:14px}
+    .card a.more{
+      display:inline-flex; margin-top:12px;
+      text-decoration:none; font-weight:900; font-size:14px;
+      color: var(--brand);
+    }
+
+    .callout{
+      background: linear-gradient(135deg, rgba(11,94,215,.10), rgba(14,165,233,.10));
+      border:1px solid rgba(11,94,215,.18);
+      border-radius: var(--radius);
+      padding:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .callout h3{margin:0; font-size:18px}
+    .callout p{margin:6px 0 0; color:var(--muted); font-size:14px}
+
+    footer{
+      border-top:1px solid var(--border);
+      padding:22px 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footer-row{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap;
+    }
+    .footlinks a{color:var(--muted); text-decoration:none; margin-right:12px}
+    .footlinks a:hover{color:var(--text)}
+
+    /* Floating button */
+    .fab{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 99;
+      border-radius: 999px;
+      padding: 12px 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    // === Single source of truth ===
+    const CONTACT_EMAIL = 'lazarusli02210@gmail.com';
+    const ISSN = '2718-1919';
+    const SITE_URL = 'https://lazarusli0210.github.io/silence/';
+    const XHS_PROFILE_URL =
+      'https://www.xiaohongshu.com/user/profile/62748bfa0000000021024d6f?xsec_token=YBdbreAUo8b_tHvTlPZoEesfrCI93LdIeEypjKSCvdS2A=&xsec_source=app_share&xhsshare=WeixinSession&appuid=62748bfa0000000021024d6f&apptime=1771061911&share_id=f06e377419844bb5ace8cf656f2904a4&wechatWid=6de04a307f5e53a1cf30a6b45fd0217e&wechatOrigin=menu';
+
+    const SUBMIT_MAILTO =
+      'mailto:' + encodeURIComponent(CONTACT_EMAIL)
+      + '?subject=' + encodeURIComponent('Submission: Manuscript to lazarusli (ISSN ' + ISSN + ')')
+      + '&body=' + encodeURIComponent(
+          'Title:\n' +
+          'Authors:\n' +
+          'Word count (100–1000):\n' +
+          'Abstract (optional):\n' +
+          'Keywords (optional):\n' +
+          'Link to related post(s) (optional):\n' +
+          'I confirm this manuscript is concise enough to fit social attention.\n'
+        );
+  </script>
+
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <a class="brand" href="#top">
+          <div class="logo" aria-hidden="true"></div>
+          <div>
+            <strong>lazarusli</strong>
+            <small>Social Journal · ISSN <span id="issnTop"></span></small>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="主导航">
+          <a href="#about">About</a>
+          <a href="#sections">Sections</a>
+          <a href="#latest">Latest</a>
+          <a href="#submit">Submit</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#" id="xhsBtnTop" target="_blank" rel="noopener">小红书主页</a>
+          <a class="btn btn-primary" href="#" id="submitBtnTop">投稿</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="subbar">
+    <div class="wrap">
+      <div class="subbar-inner">
+        <a href="#about">Editorial</a>
+        <a href="#latest">Papers</a>
+        <a href="#sections">Columns</a>
+        <a href="#submit">Author Guide</a>
+        <a href="#contact">Office</a>
+        <a href="#" id="siteBtnSub" target="_blank" rel="noopener">Site URL</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="pillrow" aria-label="badges">
+            <span class="pill">Open Access</span>
+            <span class="pill">Social Peer Review</span>
+            <span class="pill">Rapid Attention</span>
+            <span class="pill">Format First</span>
+            <span class="pill">ISSN-ready</span>
+          </div>
+
+          <h1>Social Journal Homepage</h1>
+
+          <p>
+            把社交媒体当作期刊主页：把“帖子”当作“文章”，把“收藏与评论”当作“同行评审”，
+            把“注意力”当作“引用指标”。  
+            <br/>
+            <span class="mono" style="font-size:13px; opacity:.85;">
+              (Short enough to read; formal enough to publish.)
+            </span>
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#" id="xhsBtnHero" target="_blank" rel="noopener">进入小红书 · Official Platform</a>
+            <a class="btn" href="#latest">浏览最新文章</a>
+            <a class="btn" href="#submit">投稿指南</a>
+          </div>
+
+          <p style="margin-top:12px; font-size:13px; color:var(--muted)">
+            建议字数：<b>100–1000</b>。投稿入口会自动生成邮件模板。
+          </p>
+        </div>
+
+        <aside class="panel" aria-label="信息面板">
+          <h3>Journal Information</h3>
+          <div class="kv"><span>ISSN</span><b class="mono" id="issnPanel"></b></div>
+          <div class="kv"><span>Site</span><b class="mono">Public</b></div>
+          <div class="kv"><span>Official Platform</span><b><a href="#" id="xhsPanel" target="_blank" rel="noopener">XHS Profile</a></b></div>
+          <div class="kv"><span>Submission</span><b class="mono" id="mailPanel"></b></div>
+          <div class="kv"><span>Decision Time</span><b class="mono">~ 2–4 days</b></div>
+          <div class="kv"><span>Status</span><span class="badge">Accepting</span></div>
+
+          <div style="margin-top:12px; padding-top:12px; border-top:1px dashed var(--border); color:var(--muted); font-size:13px;">
+            <b style="color:var(--text);">Reminder:</b> link your best post as “supplementary materials”.
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>About</h2>
+          <p>把你的社交媒体定位成“学术期刊式主页”。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card" style="grid-column: span 6;">
+          <h4>Aims</h4>
+          <p>
+            以社交媒体为载体发布“轻量学术文本”：短、快、带情绪张力，像论文但不必像论文那么累。
+            重点是可读性、结构感与可分享性。
+          </p>
+          <div class="meta">
+            <span class="tag">Writing</span>
+            <span class="tag">Culture</span>
+            <span class="tag">Daily Academia</span>
+            <span class="tag">Satire-ready</span>
+          </div>
+        </div>
+
+        <div class="card" style="grid-column: span 6;">
+          <h4>Scope</h4>
+          <p>
+            社交平台叙事 / 学术生活 / 读书笔记 / 研究碎片 / 语言与写作 / 情绪与认知 / 任何可以被格式化成“看起来很学术”的内容。
+          </p>
+          <div class="meta">
+            <span class="tag">Interdisciplinary</span>
+            <span class="tag">Readable</span>
+            <span class="tag">Short-form</span>
+            <span class="tag">Structured</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sections">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>Sections</h2>
+          <p>把栏目当成“标签合集”。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h4>Research Notes</h4>
+          <p>100–600 字：读书/论文碎片，结构清晰，引用随意但看起来认真。</p>
+          <div class="meta"><span class="tag">Notes</span><span class="tag">Citations</span></div>
+          <a class="more" href="#submit">Submit →</a>
+        </article>
+
+        <article class="card">
+          <h4>Campus Fieldwork</h4>
+          <p>150–800 字：学术生活田野笔记（导师/同门/会议/邮件等）。</p>
+          <div class="meta"><span class="tag">Field</span><span class="tag">Life</span></div>
+          <a class="more" href="#submit">Submit →</a>
+        </article>
+
+        <article class="card">
+          <h4>Micro-Theory</h4>
+          <p>100–1000 字：短理论、短批评、短结论。越短越像“凝练”。</p>
+          <div class="meta"><span class="tag">Theory</span><span class="tag">Short</span></div>
+          <a class="more" href="#submit">Submit →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="latest">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>Latest Articles</h2>
+          <p>这里放你最想展示的 3–6 篇爆款帖（手动改标题即可）。</p>
+        </div>
+        <div>
+          <a class="btn" href="#" id="xhsBtnLatest" target="_blank" rel="noopener">去小红书看更多</a>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h4>Article Title #1</h4>
+          <div class="meta"><span class="tag">2026</span><span class="tag">Hot</span><span class="tag">Readable</span></div>
+          <p>把这里换成一两句摘要（或爆款金句）。</p>
+          <a class="more" href="#" id="xhsLink1" target="_blank" rel="noopener">Read on XHS →</a>
+        </article>
+
+        <article class="card">
+          <h4>Article Title #2</h4>
+          <div class="meta"><span class="tag">2026</span><span class="tag">Notes</span><span class="tag">Life</span></div>
+          <p>把这里换成你的第二篇代表作简介。</p>
+          <a class="more" href="#" id="xhsLink2" target="_blank" rel="noopener">Read on XHS →</a>
+        </article>
+
+        <article class="card">
+          <h4>Article Title #3</h4>
+          <div class="meta"><span class="tag">2026</span><span class="tag">Theory</span><span class="tag">Short</span></div>
+          <p>把这里换成第三篇代表作简介。</p>
+          <a class="more" href="#" id="xhsLink3" target="_blank" rel="noopener">Read on XHS →</a>
+        </article>
+      </div>
+
+      <div style="margin-top:14px" class="callout" id="submit">
+        <div>
+          <h3>Submit a Manuscript</h3>
+          <p>点击按钮自动生成邮件；建议附上你的小红书相关链接作为补充材料。</p>
+        </div>
+        <a class="btn btn-primary" href="#" id="submitBtnCallout">投稿</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-title">
+        <div>
+          <h2>Contact</h2>
+          <p>投稿邮箱 + 官方平台链接。</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card" style="grid-column: span 6;">
+          <h4>Editorial Office</h4>
+          <p>
+            Email: <a id="contactMail" href="#"></a><br/>
+            Official platform: <a id="contactXhs" href="#" target="_blank" rel="noopener">XHS Profile</a><br/>
+            Site: <a id="contactSite" href="#" target="_blank" rel="noopener"></a>
+          </p>
+        </div>
+        <div class="card" style="grid-column: span 6;">
+          <h4>Policies</h4>
+          <p>本页为社交媒体“期刊化”展示：内容以可读性与传播性为第一优先。</p>
+          <a class="more" href="#top">Back to top →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-row">
+        <div>
+          <div style="font-weight:900; color:var(--text)">lazarusli · Social Journal</div>
+          <div>© <span id="y"></span> · ISSN <span id="issnFoot"></span> · All rights reserved.</div>
+        </div>
+        <div class="footlinks">
+          <a href="#about">About</a>
+          <a href="#sections">Sections</a>
+          <a href="#latest">Latest</a>
+          <a href="#submit">Submit</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="btn btn-primary fab" href="#" id="submitBtnFab">投稿</a>
+
+  <script>
+    // year
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // fill ISSN
+    ["issnTop","issnPanel","issnFoot"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.textContent = ISSN;
+    });
+
+    // mail everywhere
+    const mail = document.getElementById("contactMail");
+    if (mail){
+      mail.textContent = CONTACT_EMAIL;
+      mail.setAttribute("href", "mailto:" + CONTACT_EMAIL);
+    }
+    const mailPanel = document.getElementById("mailPanel");
+    if (mailPanel) mailPanel.textContent = CONTACT_EMAIL;
+
+    // site url
+    const siteBtn = document.getElementById("siteBtnSub");
+    if (siteBtn) siteBtn.href = SITE_URL;
+    const contactSite = document.getElementById("contactSite");
+    if (contactSite){ contactSite.href = SITE_URL; contactSite.textContent = SITE_URL; }
+
+    // XHS links
+    ["xhsBtnTop","xhsBtnHero","xhsBtnLatest","xhsPanel","contactXhs","xhsLink1","xhsLink2","xhsLink3"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.href = XHS_PROFILE_URL;
+    });
+
+    // submission buttons
+    ["submitBtnTop","submitBtnCallout","submitBtnFab"].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el) el.setAttribute("href", SUBMIT_MAILTO);
+    });
+  </script>
+</body>
+</html>
